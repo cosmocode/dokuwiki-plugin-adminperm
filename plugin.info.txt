@@ -1,0 +1,7 @@
+base   adminperm
+author Andreas Gohr
+email  dokuwiki@cosmocode.de
+date   2018-10-30
+name   adminperm plugin
+desc   Give Access to Admin Plugins to non-admin groups
+url    https://www.dokwuki.org/plugin:adminperm

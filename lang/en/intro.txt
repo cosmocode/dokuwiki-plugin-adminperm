@@ -1,0 +1,7 @@
+====== Admin Plugin Access Overrides ======
+
+This interface allows you to give access to admin and manager plugins to users and groups without making them admins or managers.
+
+Simply specify the users and groups (''@''-prefixed) as comma separated list for each of the available plugins. An empty list means the default access checks are used.
+
+:!: **Please be careful!** Plugins may not expect that they are run by unprivileged users. Giving access to them may lead to privilege escalations and anforeseen side effects.
