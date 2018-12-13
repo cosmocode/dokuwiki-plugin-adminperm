@@ -9,7 +9,7 @@
 
 class admin_plugin_adminperm extends DokuWiki_Admin_Plugin
 {
-    protected $config = DOKU_CONF . '/adminperm.json';
+    protected $config = DOKU_CONF . 'adminperm.json';
 
 
     /**
@@ -35,8 +35,9 @@ class admin_plugin_adminperm extends DokuWiki_Admin_Plugin
     {
         global $INPUT;
         if ($INPUT->post->has('d') && checkSecurityToken()) {
-            $this->save($INPUT->post->arr('d'));
-            msg('data saved', 1);
+            if ($this->save($INPUT->post->arr('d'))) {
+                msg('data saved', 1);
+            }
         }
     }
 
@@ -79,7 +80,7 @@ class admin_plugin_adminperm extends DokuWiki_Admin_Plugin
         if ($config === null || $refresh) {
             $config = [];
             if (file_exists($this->config)) {
-                $config = json_decode(file_get_contents($this->config), true);
+                $config = json_decode(io_readFile($this->config, false), true);
             }
         }
         return $config;
@@ -89,6 +90,7 @@ class admin_plugin_adminperm extends DokuWiki_Admin_Plugin
      * Save the given config
      *
      * @param string[] $data
+     * @return bool
      */
     public function save($data)
     {
@@ -97,7 +99,7 @@ class admin_plugin_adminperm extends DokuWiki_Admin_Plugin
         $data = array_map('trim', $data);
         $data = array_filter($data);
 
-        file_put_contents($this->config, json_encode($data, JSON_PRETTY_PRINT));
+        return io_saveFile($this->config, json_encode($data, JSON_PRETTY_PRINT));
     }
 }
 
