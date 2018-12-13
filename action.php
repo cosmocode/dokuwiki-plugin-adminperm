@@ -35,7 +35,7 @@ class action_plugin_adminperm extends DokuWiki_Action_Plugin
      */
     public function handle_accesscheck(Doku_Event $event, $param)
     {
-        global $INFO;
+        global $USERINFO;
         global $INPUT;
 
         if ($event->data['hasAccess']) return; // access already granted? do nothing
@@ -53,7 +53,7 @@ class action_plugin_adminperm extends DokuWiki_Action_Plugin
         if (empty($cnf[$pname])) return;
 
         // check for match
-        if (auth_isMember($cnf[$pname], $INPUT->server->str('REMOTE_USER'), $INFO['userinfo']['grps'])) {
+        if (auth_isMember($cnf[$pname], $INPUT->server->str('REMOTE_USER'), $USERINFO['grps'])) {
             $event->data['hasAccess'] = true; // we found an override
         }
 
