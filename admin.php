@@ -36,7 +36,7 @@ class admin_plugin_adminperm extends DokuWiki_Admin_Plugin
         global $INPUT;
         if ($INPUT->post->has('d') && checkSecurityToken()) {
             if ($this->save($INPUT->post->arr('d'))) {
-                msg('data saved', 1);
+                msg($this->getLang('saved'), 1);
             }
         }
     }
@@ -53,7 +53,7 @@ class admin_plugin_adminperm extends DokuWiki_Admin_Plugin
         sort($plugins);
 
         $form = new \dokuwiki\Form\Form();
-        $form->addFieldsetOpen('Access Overrides');
+        $form->addFieldsetOpen($this->getLang('legend'));
         foreach ($plugins as $plugin) {
             /** @var DokuWiki_Admin_Plugin $obj */
             $obj = plugin_load('admin', $plugin);
@@ -63,7 +63,13 @@ class admin_plugin_adminperm extends DokuWiki_Admin_Plugin
 
             $form->addTextInput('d[' . $plugin . ']', $label)->addClass('block')->val($cnf[$plugin] ?: '');
         }
-        $form->addButton('submit', 'Save');
+
+        if (file_exists($this->config) && !is_writable($this->config)) {
+            msg(sprintf($this->getLang('nosave'), $this->config), -1);
+        } else {
+            $form->addButton('submit', $this->getLang('save'));
+
+        }
 
         echo $form->toHTML();
     }
