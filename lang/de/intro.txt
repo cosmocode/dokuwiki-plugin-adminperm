@@ -1,0 +1,8 @@
+====== Admin Plugin Zugangsberechtigungen ======
+
+Dieses Werkzeugt erleubt es Ihnen, Nutzern Zugriff auf auf Admin- oder Manager-Plugins zu geben ohne diese Nutzer selbst zu Admins oder Manager macher zu müssen.
+
+Geben Sie einfach die Nutzer und Gruppen (Mit ''@''-Prefix) als Kommaseparierte Liste für jedes der verfügbaren Plugins an. Eine leere Liste bedeutet, dass die Standard-Berechtigungen verwendet werden.
+
+
+:!: **Vorsicht!** Plugins sind eventuell nicht dafür ausgelegt von unpriviligierten Nutzern verwendet zu werden. Diese trotzdem zugreifbar zu machen, kann zu Rechteausweitungen und unvorhergesehenden Seiteneffekten führen!
